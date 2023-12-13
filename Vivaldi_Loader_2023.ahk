@@ -9,7 +9,6 @@ SetBatchLines, -1
 
 ;___Run vivaldi.exe if necessary
 
-;~ vivaldi_exe_path := "C:\Users\B06065\Downloads\Vivaldi_portable\Application\vivaldi.exe"
 vivaldi_exe_path := A_ScriptDir . "\vivaldi.exe"
 
 if !WinExist("ahk_exe vivaldi.exe") {
