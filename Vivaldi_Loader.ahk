@@ -11,8 +11,8 @@ SetBatchLines, -1
 
 EnvGet, usrpath, USERPROFILE
 
-vivaldi_exe_path := usrpath . "\Downloads\Vivaldi_portable\Application\vivaldi.exe"
-;~ vivaldi_exe_path := A_ScriptDir . "\vivaldi.exe"
+;~ vivaldi_exe_path := usrpath . "\Downloads\Vivaldi_portable\Application\vivaldi.exe"
+vivaldi_exe_path := A_ScriptDir . "\vivaldi.exe"
 
 if !WinExist("ahk_exe vivaldi.exe") {
 	Run, %vivaldi_exe_path%
