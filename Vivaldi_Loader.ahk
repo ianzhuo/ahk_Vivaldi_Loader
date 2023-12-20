@@ -9,7 +9,10 @@ SetBatchLines, -1
 
 ;___Run vivaldi.exe if necessary
 
-vivaldi_exe_path := A_ScriptDir . "\vivaldi.exe"
+EnvGet, usrpath, USERPROFILE
+
+vivaldi_exe_path := usrpath . "\Downloads\Vivaldi_portable\Application\vivaldi.exe"
+;~ vivaldi_exe_path := A_ScriptDir . "\vivaldi.exe"
 
 if !WinExist("ahk_exe vivaldi.exe") {
 	Run, %vivaldi_exe_path%
@@ -40,6 +43,18 @@ return
 	return
 
 #If WinActive("ahk_exe vivaldi.exe")
+	^+e::
+		UIA := UIA_Interface() ; Initialize UIA interface
+		cEl := UIA.ElementFromHandle("ahk_exe vivaldi.exe") ; Get the element for the Notepad window
+		try
+		{
+			cEl.FindFirst("Name=Raindrop.io AND ControlType=Button").Click() ; Specify both name "Five" and control type "Button"
+		}
+		catch
+		{
+			MsgBox, "Not found"
+		}
+	return
 	^+m::
 		s := ""
 		pos := 0
@@ -61,3 +76,4 @@ return
 		}
 		length := x.Length()
 		x[pos+1].SetFocus()
+	return
