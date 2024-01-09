@@ -11,8 +11,8 @@ SetBatchLines, -1
 
 EnvGet, usrpath, USERPROFILE
 
-;~ vivaldi_exe_path := usrpath . "\Downloads\Vivaldi_portable\Application\vivaldi.exe"
-vivaldi_exe_path := A_ScriptDir . "\vivaldi.exe"
+vivaldi_exe_path := usrpath . "\Downloads\Vivaldi_portable\Application\vivaldi.exe"
+;~ vivaldi_exe_path := A_ScriptDir . "\vivaldi.exe"
 
 if !WinExist("ahk_exe vivaldi.exe") {
 	Run, %vivaldi_exe_path%
@@ -44,11 +44,13 @@ return
 
 #If WinActive("ahk_exe vivaldi.exe")
 	^+e::
+		hwnd := WinActive("A")
+		;~ MsgBox %hwnd%
 		UIA := UIA_Interface() ; Initialize UIA interface
-		cEl := UIA.ElementFromHandle("ahk_exe vivaldi.exe") ; Get the element for the Notepad window
+		cEl := UIA.ElementFromHandle(hwnd) ; Get the element for the Notepad window
 		try
 		{
-			cEl.FindFirst("Name=Raindrop.io AND ControlType=Button").Click() ; Specify both name "Five" and control type "Button"
+			cEl.FindFirst("Name=Raindrop.io OR Name=✓ AND ControlType=Button").Click() ; Specify both name "Five" and control type "Button"
 		}
 		catch
 		{
